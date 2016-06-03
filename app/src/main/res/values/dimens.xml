@@ -1,0 +1,14 @@
+<resources>
+    <dimen name="activity.margin.horizontal">16dp</dimen>
+    <dimen name="activity.margin.vertical">16dp</dimen>
+    <dimen name="activity.margin.slim.horizontal">8dp</dimen>
+    <dimen name="activity.margin.slim.vertical">8dp</dimen>
+
+    <dimen name="cardview.radius">2dp</dimen>
+    <dimen name="cardview.margin">16dp</dimen>
+    <dimen name="cardview.margin.slim">8dp</dimen>
+
+    <dimen name="listview.padding.horizontal">16dp</dimen>
+    <dimen name="listview.padding.horizontal.slim">8dp</dimen>
+    <dimen name="listview.padding.vertical">8dp</dimen>
+</resources>

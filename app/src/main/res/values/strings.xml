@@ -1,0 +1,17 @@
+<resources>
+    <string name="common.app.name">老人看护</string>
+
+    <string name="title.overview">看护概览</string>
+    <string name="title.data">详细数据</string>
+    <string name="title.today">今天</string>
+    <string name="title.this.month">本月</string>
+    <string name="title.this.year">本年</string>
+
+    <string name="common.heart.rate">心率</string>
+    <string name="common.temperature">体温</string>
+
+    <string name="action.camera">查看监控</string>
+    <string name="action.settings">设置</string>
+
+    <string name="error.data.not_found">未找到此时间段内的数据</string>
+</resources>
