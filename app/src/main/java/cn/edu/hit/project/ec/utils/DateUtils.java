@@ -71,11 +71,11 @@ public class DateUtils {
     }
 
     /**
-     * Get start datetime of a giving date considering certain field
+     * Get start datetime of a giving date under a certain scale
      */
-    public static Date startOf(Date date, int field) {
+    public static Date startOf(Date date, int scale) {
         DateTime dt = new DateTime(date);
-        switch (field) {
+        switch (scale) {
             case Calendar.YEAR:
                 dt = dt.monthOfYear().withMinimumValue();
             case Calendar.MONTH:
@@ -94,11 +94,11 @@ public class DateUtils {
     }
 
     /**
-     * Get start datetime of a giving date considering certain field
+     * Get start datetime of a giving date under certain scale
      */
-    public static Date endOf(Date date, int field) {
+    public static Date endOf(Date date, int scale) {
         DateTime dt = new DateTime(date);
-        switch (field) {
+        switch (scale) {
             case Calendar.YEAR:
                 dt = dt.monthOfYear().withMaximumValue();
             case Calendar.MONTH:

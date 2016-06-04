@@ -12,11 +12,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import cn.edu.hit.project.ec.models.BaseData;
-import cn.edu.hit.project.ec.models.DailyData;
-import cn.edu.hit.project.ec.models.HourlyData;
-import cn.edu.hit.project.ec.models.MonthlyData;
-import cn.edu.hit.project.ec.models.SensorData;
+import cn.edu.hit.project.ec.models.data.BaseData;
+import cn.edu.hit.project.ec.models.data.DailyData;
+import cn.edu.hit.project.ec.models.data.HourlyData;
+import cn.edu.hit.project.ec.models.data.MonthlyData;
+import cn.edu.hit.project.ec.models.data.SensorData;
 import cn.edu.hit.project.ec.models.base.Coordinate;
 import cn.edu.hit.project.ec.models.base.DataScale;
 

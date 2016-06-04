@@ -1,4 +1,4 @@
-package cn.edu.hit.project.ec.models;
+package cn.edu.hit.project.ec.models.data;
 
 import java.util.Date;
 

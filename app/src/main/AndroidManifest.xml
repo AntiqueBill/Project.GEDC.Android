@@ -3,6 +3,7 @@
     package="cn.edu.hit.project.ec">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
         android:name=".App"
@@ -12,13 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".DataActivity"
-            android:label="@string/title.data"
-            android:theme="@style/AppTheme.NoActionBar">
-        </activity>
-        <activity
             android:name=".OverviewActivity"
             android:label="@string/title.overview"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -26,6 +23,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".DataActivity"
+            android:label="@string/title.data"
+            android:theme="@style/AppTheme.NoActionBar"/>
+
+        <service
+            android:name=".services.NotificationService"
+            android:enabled="true"
+            android:exported="false"/>
     </application>
 
 </manifest>

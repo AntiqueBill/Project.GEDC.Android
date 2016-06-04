@@ -1,4 +1,4 @@
-package cn.edu.hit.project.ec.models;
+package cn.edu.hit.project.ec.models.data;
 
 import android.support.annotation.NonNull;
 
@@ -12,12 +12,10 @@ import cn.edu.hit.project.ec.models.base.Coordinate;
 import cn.edu.hit.project.ec.utils.DateUtils;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
-import io.realm.annotations.RealmClass;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
-@RealmClass
-public class MonthlyData extends RealmObject implements BaseData {
+public class DailyData extends RealmObject implements BaseData {
     @PrimaryKey
     private int id;
     private int count;
@@ -27,7 +25,7 @@ public class MonthlyData extends RealmObject implements BaseData {
     private Date timestamp;
     private long sessionId;
 
-    public MonthlyData() {}
+    public DailyData() {}
 
     @Override
     public int getId() {
@@ -58,7 +56,6 @@ public class MonthlyData extends RealmObject implements BaseData {
     public long getSessionId() {
         return sessionId;
     }
-
     @Override
     public void setSessionId(long sessionId) {
         this.sessionId = sessionId;
@@ -69,24 +66,24 @@ public class MonthlyData extends RealmObject implements BaseData {
         return new Gson().toJson(this);
     }
 
-    public static Coordinate<Date, MonthlyData>[] getCoordinates(@NonNull List<MonthlyData> dataList, Date start, Date end) {
+    public static Coordinate<Date, DailyData>[] getCoordinates(@NonNull List<DailyData> dataList, Date start, Date end) {
         checkNotNull(dataList);
         // Assume results are sorted by timestamp
         int cursor = 0;
         int dataSize = dataList.size();
-        int months = DateUtils.diff(Calendar.MONTH, start, end) + 1;
-        Coordinate<Date, MonthlyData>[] coordinates = new Coordinate[months];
-        for (int i = 0; i < months; i++) {
-            Date month = DateUtils.add(start, Calendar.MONTH, i);
-            MonthlyData value = null;
+        int days = DateUtils.diff(Calendar.DATE, start, end) + 1;
+        Coordinate<Date, DailyData>[] coordinates = new Coordinate[days];
+        for (int i = 0; i < days; i++) {
+            Date date = DateUtils.add(start, Calendar.DATE, i);
+            DailyData value = null;
             for (int j = cursor; j < dataSize; j++) {
-                if (DateUtils.equals(Calendar.MONTH, month, dataList.get(j).timestamp)) {
+                if (DateUtils.equals(Calendar.DATE, date, dataList.get(j).timestamp)) {
                     value = dataList.get(j);
                     cursor = j + 1;
                     break;
                 }
             }
-            coordinates[i] = new Coordinate<>(month, value);
+            coordinates[i] = new Coordinate<>(date, value);
         }
         return coordinates;
     }

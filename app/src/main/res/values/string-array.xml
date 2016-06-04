@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="overview_tab_title">
-        <item>@string/title.today</item>
-        <item>@string/title.this.month</item>
-        <item>@string/title.this.year</item>
+        <item>@string/title.last_24_hours</item>
+        <item>@string/title.last_one_month</item>
+        <item>@string/title.last_year</item>
     </string-array>
 </resources>

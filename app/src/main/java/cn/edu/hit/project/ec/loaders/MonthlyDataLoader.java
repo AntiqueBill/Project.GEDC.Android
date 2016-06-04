@@ -3,7 +3,6 @@ package cn.edu.hit.project.ec.loaders;
 import android.content.Context;
 import android.support.annotation.Nullable;
 import android.support.v4.content.AsyncTaskLoader;
-import android.util.Log;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -13,7 +12,7 @@ import java.util.List;
 import java.util.Locale;
 
 import cn.edu.hit.project.ec.App;
-import cn.edu.hit.project.ec.models.MonthlyData;
+import cn.edu.hit.project.ec.models.data.MonthlyData;
 import cn.edu.hit.project.ec.network.DataService;
 import cn.edu.hit.project.ec.network.ServiceFactory;
 import io.realm.Realm;

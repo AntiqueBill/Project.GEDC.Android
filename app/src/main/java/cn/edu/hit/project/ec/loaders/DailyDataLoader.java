@@ -12,7 +12,7 @@ import java.util.List;
 import java.util.Locale;
 
 import cn.edu.hit.project.ec.App;
-import cn.edu.hit.project.ec.models.DailyData;
+import cn.edu.hit.project.ec.models.data.DailyData;
 import cn.edu.hit.project.ec.network.DataService;
 import cn.edu.hit.project.ec.network.ServiceFactory;
 import io.realm.Realm;

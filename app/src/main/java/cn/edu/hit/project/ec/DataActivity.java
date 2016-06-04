@@ -27,7 +27,7 @@ import cn.edu.hit.project.ec.loaders.DailyDataLoader;
 import cn.edu.hit.project.ec.loaders.HourlyDataLoader;
 import cn.edu.hit.project.ec.loaders.MonthlyDataLoader;
 import cn.edu.hit.project.ec.loaders.SensorDataLoader;
-import cn.edu.hit.project.ec.models.BaseData;
+import cn.edu.hit.project.ec.models.data.BaseData;
 import cn.edu.hit.project.ec.models.base.Coordinate;
 import cn.edu.hit.project.ec.models.base.DataScale;
 import cn.edu.hit.project.ec.models.base.DataType;
