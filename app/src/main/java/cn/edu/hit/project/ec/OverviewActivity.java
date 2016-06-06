@@ -1,5 +1,6 @@
 package cn.edu.hit.project.ec;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
@@ -40,9 +41,10 @@ public class OverviewActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
             return true;
+        } else if (id == R.id.action_camera) {
+            startActivity(new Intent(this, VideoActivity.class));
         }
 
         return super.onOptionsItemSelected(item);

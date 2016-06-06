@@ -20,3 +20,5 @@
 -keep class retrofit2.** { *; }
 -keepattributes Signature
 -keepattributes Exceptions
+-keepattributes InnerClasses
+-dontoptimize

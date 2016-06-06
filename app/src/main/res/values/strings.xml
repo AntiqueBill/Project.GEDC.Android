@@ -17,4 +17,5 @@
     <string name="alert.fall">您的老人可能摔倒了！</string>
 
     <string name="error.data.not_found">未找到此时间段内的数据</string>
+    <string name="title_activity_main">MainActivity</string>
 </resources>

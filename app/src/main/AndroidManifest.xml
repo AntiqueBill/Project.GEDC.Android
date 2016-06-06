@@ -12,26 +12,30 @@
         android:label="@string/common.app.name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <service
+            android:name=".services.NotificationService"
+            android:enabled="true"
+            android:exported="false" />
+
         <activity
             android:name=".OverviewActivity"
             android:label="@string/title.overview"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+
         <activity
             android:name=".DataActivity"
             android:label="@string/title.data"
-            android:theme="@style/AppTheme.NoActionBar"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
-        <service
-            android:name=".services.NotificationService"
-            android:enabled="true"
-            android:exported="false"/>
+        <activity
+            android:name=".VideoActivity"
+            android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
     </application>
 
 </manifest>
