@@ -2,6 +2,7 @@ package cn.edu.hit.project.ec;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
@@ -23,20 +24,25 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import cn.edu.hit.project.ec.loaders.DailyDataLoader;
-import cn.edu.hit.project.ec.loaders.HourlyDataLoader;
-import cn.edu.hit.project.ec.loaders.MonthlyDataLoader;
-import cn.edu.hit.project.ec.loaders.SensorDataLoader;
-import cn.edu.hit.project.ec.models.data.BaseData;
+import cn.edu.hit.project.ec.loaders.data.BaseDataLoader;
+import cn.edu.hit.project.ec.loaders.data.DailyDataLoader;
+import cn.edu.hit.project.ec.loaders.data.HourlyDataLoader;
+import cn.edu.hit.project.ec.loaders.data.MonthlyDataLoader;
+import cn.edu.hit.project.ec.loaders.data.SensorDataLoader;
 import cn.edu.hit.project.ec.models.base.Coordinate;
 import cn.edu.hit.project.ec.models.base.DataScale;
 import cn.edu.hit.project.ec.models.base.DataType;
+import cn.edu.hit.project.ec.models.data.BaseData;
+import cn.edu.hit.project.ec.models.user.User;
 import cn.edu.hit.project.ec.utils.DateUtils;
 import cn.edu.hit.project.ec.utils.ViewUtils;
 import cn.edu.hit.project.ec.views.adapters.ListAdapter;
 import cn.edu.hit.project.ec.views.builders.ChartBuilder;
 
-public class DataActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks, AdapterView.OnItemClickListener {
+public class DataActivity extends AppCompatActivity
+        implements LoaderManager.LoaderCallbacks,
+                AdapterView.OnItemClickListener,
+                BaseDataLoader.OnLoadFailedListener {
     private String mUnit;
     private Date mDateTo;
     private Date mDateFrom;
@@ -97,13 +103,13 @@ public class DataActivity extends AppCompatActivity implements LoaderManager.Loa
     public Loader onCreateLoader(int id, Bundle args) {
         switch (mScale) {
             case MONTHLY:
-                return new MonthlyDataLoader(this, mDateFrom, mDateTo);
+                return new MonthlyDataLoader(this, mDateFrom, mDateTo, this);
             case DAILY:
-                return new DailyDataLoader(this, mDateFrom, mDateTo);
+                return new DailyDataLoader(this, mDateFrom, mDateTo, this);
             case HOURLY:
-                return new HourlyDataLoader(this, mDateFrom, mDateTo);
+                return new HourlyDataLoader(this, mDateFrom, mDateTo, this);
             case SENSOR:
-                return new SensorDataLoader(this, mDateFrom, mDateTo);
+                return new SensorDataLoader(this, mDateFrom, mDateTo, this);
             default:
                 return null;
         }
@@ -190,5 +196,15 @@ public class DataActivity extends AppCompatActivity implements LoaderManager.Loa
             intent.putExtra("from", nextFrom.getTime());
             startActivity(intent);
         }
+    }
+
+    @Override
+    public void onLoadFailed() {
+        User.logout(PreferenceManager.getDefaultSharedPreferences(this));
+        Intent intent = new Intent(this, OverviewActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        intent.putExtra("EXIT", true);
+        startActivity(intent);
+        finish();
     }
 }

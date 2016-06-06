@@ -34,7 +34,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:background="@color/card.red"
-                        android:text="@string/common.heart.rate"
+                        android:text="@string/common.heart_rate"
                         style="@style/CardView.Title" />
 
                     <org.eazegraph.lib.charts.ValueLineChart

@@ -6,6 +6,8 @@
         <item name="colorPrimary">@color/color.primary</item>
         <item name="colorPrimaryDark">@color/color.primary.dark</item>
         <item name="colorAccent">@color/color.accent</item>
+        <item name="colorControlNormal">@color/color.divider</item>
+        <item name="android:textColorHint">@color/text.hint</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -32,6 +34,13 @@
         <item name="android:paddingBottom">@dimen/cardview.margin.slim</item>
         <item name="android:paddingLeft">@dimen/cardview.margin</item>
         <item name="android:paddingRight">@dimen/cardview.margin</item>
+    </style>
+
+    <style name="AppTheme.EditText" parent="TextAppearance.AppCompat.Body1"/>
+
+    <style name="AppTheme.Button" parent="ThemeOverlay.AppCompat.Light">
+        <item name="colorButtonNormal">@color/color.primary.dark</item>
+        <item name="colorAccent">@color/color.accent</item>
     </style>
 
 </resources>

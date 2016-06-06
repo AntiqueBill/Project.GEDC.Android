@@ -12,15 +12,35 @@ import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface DataService {
-    @GET("{sensor_id}")
-    Call<List<SensorData>> listSensorData(@Path("sensor_id") int sensorId, @Query("from") String from, @Query("to") String to);
+    @GET("data/{sensor_id}")
+    Call<List<SensorData>> listSensorData(
+            @Path("sensor_id") int sensorId,
+            @Query("from") String from,
+            @Query("to") String to,
+            @Query("api_token") String token
+    );
 
-    @GET("{sensor_id}/hour")
-    Call<List<HourlyData>> listHourlyData(@Path("sensor_id") int sensorId, @Query("from") String from, @Query("to") String to);
+    @GET("data/{sensor_id}/hour")
+    Call<List<HourlyData>> listHourlyData(
+            @Path("sensor_id") int sensorId,
+            @Query("from") String from,
+            @Query("to") String to,
+            @Query("api_token") String token
+    );
 
-    @GET("{sensor_id}/day")
-    Call<List<DailyData>> listDailyData(@Path("sensor_id") int sensorId, @Query("from") String from, @Query("to") String to);
+    @GET("data/{sensor_id}/day")
+    Call<List<DailyData>> listDailyData(
+            @Path("sensor_id") int sensorId,
+            @Query("from") String from,
+            @Query("to") String to,
+            @Query("api_token") String token
+    );
 
-    @GET("{sensor_id}/month")
-    Call<List<MonthlyData>> listMonthlyData(@Path("sensor_id") int sensorId, @Query("from") String from, @Query("to") String to);
+    @GET("data/{sensor_id}/month")
+    Call<List<MonthlyData>> listMonthlyData(
+            @Path("sensor_id") int sensorId,
+            @Query("from") String from,
+            @Query("to") String to,
+            @Query("api_token") String token
+    );
 }

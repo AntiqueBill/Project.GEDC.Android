@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.TaskStackBuilder;
 
 import com.google.gson.Gson;
 import com.pusher.client.Pusher;
@@ -63,7 +62,7 @@ public class NotificationService extends Service implements SubscriptionEventLis
         int notifyId = 0;
         Gson gson = new Gson();
         NotificationData nData = gson.fromJson(data, NotificationData.class);
-        if (nData == null || nData.sensorId != App.SENSOR_ID) {
+        if (nData == null || nData.sensorId != ((App) getApplicationContext()).getSensorId()) {
             return;
         }
 

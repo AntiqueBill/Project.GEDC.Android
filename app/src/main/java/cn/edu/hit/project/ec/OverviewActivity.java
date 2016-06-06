@@ -2,6 +2,7 @@ package cn.edu.hit.project.ec;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -9,14 +10,23 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import cn.edu.hit.project.ec.loaders.data.BaseDataLoader;
+import cn.edu.hit.project.ec.models.user.User;
 import cn.edu.hit.project.ec.views.adapters.SectionsPagerAdapter;
 
-public class OverviewActivity extends AppCompatActivity {
+public class OverviewActivity extends AppCompatActivity implements BaseDataLoader.OnLoadFailedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_overview);
+
+        Intent intent = getIntent();
+        if (intent != null) {
+            if (intent.getBooleanExtra("EXIT", false)) {
+                logout();
+            }
+        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -41,12 +51,25 @@ public class OverviewActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        if (id == R.id.action_settings) {
-            return true;
-        } else if (id == R.id.action_camera) {
+        if (id == R.id.action_camera) {
             startActivity(new Intent(this, VideoActivity.class));
+        } else if (id == R.id.action_logout) {
+            logout();
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onLoadFailed() {
+        logout();
+    }
+
+    public void logout() {
+        User.logout(PreferenceManager.getDefaultSharedPreferences(this));
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.putExtra("EXPIRED", true);
+        startActivity(intent);
+        finish();
     }
 }

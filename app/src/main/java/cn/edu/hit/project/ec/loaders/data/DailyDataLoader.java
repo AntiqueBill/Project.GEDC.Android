@@ -1,8 +1,7 @@
-package cn.edu.hit.project.ec.loaders;
+package cn.edu.hit.project.ec.loaders.data;
 
 import android.content.Context;
 import android.support.annotation.Nullable;
-import android.support.v4.content.AsyncTaskLoader;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;
@@ -19,16 +18,13 @@ import io.realm.Realm;
 import io.realm.RealmQuery;
 import io.realm.RealmResults;
 import retrofit2.Call;
+import retrofit2.Response;
 
-public class DailyDataLoader extends AsyncTaskLoader<List<DailyData>> {
-    private Date to;
-    private Date from;
+public class DailyDataLoader extends BaseDataLoader<List<DailyData>> {
     private SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd", Locale.CHINA);
 
-    public DailyDataLoader(Context context, Date from, Date to) {
-        super(context);
-        this.to = to;
-        this.from = from;
+    public DailyDataLoader(Context context, Date from, Date to, OnLoadFailedListener listener) {
+        super(context, from, to, listener);
     }
 
     @Override
@@ -48,9 +44,14 @@ public class DailyDataLoader extends AsyncTaskLoader<List<DailyData>> {
     public List<DailyData> loadInBackground() {
         List<DailyData> dataList = new ArrayList<>();
         DataService service = ServiceFactory.getService(DataService.class);
-        Call<List<DailyData>> call = service.listDailyData(App.SENSOR_ID, format.format(from), format.format(to));
+        Call<List<DailyData>> call = service.listDailyData(app.getSensorId(), format.format(from), format.format(to), app.getApiToken());
         try {
-            dataList = call.execute().body();
+            Response<List<DailyData>> response = call.execute();
+            if (response.code() == 401) {
+                listener.onLoadFailed();
+                return null;
+            }
+            dataList = response.body();
             Realm realm = Realm.getDefaultInstance();
             realm.beginTransaction();
             for (DailyData data : dataList) {

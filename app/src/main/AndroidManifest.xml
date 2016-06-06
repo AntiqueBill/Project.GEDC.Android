@@ -10,7 +10,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/common.app.name"
-        android:supportsRtl="true"
+        android:supportsRtl="false"
         android:theme="@style/AppTheme">
         <service
             android:name=".services.NotificationService"
@@ -18,15 +18,24 @@
             android:exported="false" />
 
         <activity
+            android:label="@string/common.login"
+            android:name=".LoginActivity">
+            <intent-filter android:label="@string/common.app.name">
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity
+            android:label="@string/common.register"
+            android:name=".RegisterActivity"/>
+
+        <activity
             android:name=".OverviewActivity"
             android:label="@string/title.overview"
             android:launchMode="singleTask"
-            android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
-        </activity>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".DataActivity"
@@ -34,6 +43,7 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
+            android:label="@string/common.camera"
             android:name=".VideoActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
     </application>

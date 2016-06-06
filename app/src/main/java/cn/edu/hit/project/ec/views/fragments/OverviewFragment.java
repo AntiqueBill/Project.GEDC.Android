@@ -20,17 +20,19 @@ import java.util.List;
 import java.util.Map;
 
 import cn.edu.hit.project.ec.DataActivity;
+import cn.edu.hit.project.ec.OverviewActivity;
 import cn.edu.hit.project.ec.R;
-import cn.edu.hit.project.ec.loaders.DailyDataLoader;
-import cn.edu.hit.project.ec.loaders.HourlyDataLoader;
-import cn.edu.hit.project.ec.loaders.MonthlyDataLoader;
-import cn.edu.hit.project.ec.models.data.BaseData;
+import cn.edu.hit.project.ec.loaders.data.DailyDataLoader;
+import cn.edu.hit.project.ec.loaders.data.HourlyDataLoader;
+import cn.edu.hit.project.ec.loaders.data.MonthlyDataLoader;
 import cn.edu.hit.project.ec.models.base.DataScale;
 import cn.edu.hit.project.ec.models.base.DataType;
+import cn.edu.hit.project.ec.models.data.BaseData;
 import cn.edu.hit.project.ec.utils.DateUtils;
 import cn.edu.hit.project.ec.views.builders.ChartBuilder;
 
-public class OverviewFragment extends Fragment implements LoaderManager.LoaderCallbacks {
+public class OverviewFragment extends Fragment
+        implements LoaderManager.LoaderCallbacks {
     private static Map<DataScale, OverviewFragment> fragmentStore = new HashMap<>();
 
     private DataScale mScale;
@@ -104,11 +106,11 @@ public class OverviewFragment extends Fragment implements LoaderManager.LoaderCa
     public Loader onCreateLoader(int id, Bundle args) {
         switch (mScale) {
             case HOURLY:
-                return new HourlyDataLoader(getContext(), mDateFrom, mDateTo);
+                return new HourlyDataLoader(getContext(), mDateFrom, mDateTo, (OverviewActivity) getActivity());
             case DAILY:
-                return new DailyDataLoader(getContext(), mDateFrom, mDateTo);
+                return new DailyDataLoader(getContext(), mDateFrom, mDateTo, (OverviewActivity) getActivity());
             case MONTHLY:
-                return new MonthlyDataLoader(getContext(), mDateFrom, mDateTo);
+                return new MonthlyDataLoader(getContext(), mDateFrom, mDateTo, (OverviewActivity) getActivity());
             default:
                 return null;
         }
