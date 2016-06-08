@@ -18,18 +18,15 @@
             android:exported="false" />
 
         <activity
+            android:name=".LoginActivity"
             android:label="@string/common.login"
-            android:name=".LoginActivity">
-            <intent-filter android:label="@string/common.app.name">
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity
+            android:name=".RegisterActivity"
             android:label="@string/common.register"
-            android:name=".RegisterActivity"/>
+            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".OverviewActivity"
@@ -43,9 +40,20 @@
             android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
-            android:label="@string/common.camera"
             android:name=".VideoActivity"
+            android:label="@string/title.camera"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+
+        <activity
+            android:name=".MatchActivity"
+            android:label="@string/title.match"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter android:label="@string/common.app.name">
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

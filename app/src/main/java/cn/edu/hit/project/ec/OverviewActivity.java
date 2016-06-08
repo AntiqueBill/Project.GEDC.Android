@@ -53,6 +53,8 @@ public class OverviewActivity extends AppCompatActivity implements BaseDataLoade
 
         if (id == R.id.action_camera) {
             startActivity(new Intent(this, VideoActivity.class));
+        } else if (id == R.id.action_match) {
+            startActivity(new Intent(this, MatchActivity.class));
         } else if (id == R.id.action_logout) {
             logout();
         }

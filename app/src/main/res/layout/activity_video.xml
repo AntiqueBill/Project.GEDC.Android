@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:gravity="center"
     android:background="@android:color/black"
-    tools:context="cn.edu.hit.project.ec.VideoActivity">
+    tools:context=".VideoActivity">
 
     <VideoView
         android:id="@+id/videoView"

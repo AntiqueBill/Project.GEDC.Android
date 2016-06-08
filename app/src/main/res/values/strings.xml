@@ -7,6 +7,8 @@
     <string name="title.last_one_month">近一月</string>
     <string name="title.last_year">近一年</string>
     <string name="title.alert">警报</string>
+    <string name="title.camera">监控摄像</string>
+    <string name="title.match">设备配对</string>
 
     <string name="common.user_name">用户名</string>
     <string name="common.email">Email</string>
@@ -17,7 +19,6 @@
     <string name="common.registering">注册中…</string>
     <string name="common.heart_rate">心率</string>
     <string name="common.temperature">体温</string>
-    <string name="common.camera">监控摄像</string>
     <string name="common.logout">注销</string>
 
     <string name="alert.fall">您的老人可能摔倒了！</string>
