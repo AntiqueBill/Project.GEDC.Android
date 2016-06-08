@@ -7,7 +7,12 @@
     <string name="title.last_one_month">近一月</string>
     <string name="title.last_year">近一年</string>
     <string name="title.alert">警报</string>
+    <string name="title.camera">监控摄像</string>
+    <string name="title.match">设备配对</string>
+    <string name="title.select_wifi">选择WiFi</string>
 
+    <string name="common.ok">确定</string>
+    <string name="common.cancel">取消</string>
     <string name="common.user_name">用户名</string>
     <string name="common.email">Email</string>
     <string name="common.password">密码</string>
@@ -17,8 +22,23 @@
     <string name="common.registering">注册中…</string>
     <string name="common.heart_rate">心率</string>
     <string name="common.temperature">体温</string>
-    <string name="common.camera">监控摄像</string>
     <string name="common.logout">注销</string>
+    <string name="common.next">下一步</string>
+    <string name="common.enable_wifi">开启WiFi</string>
+    <string name="common.wifi_enabling">正在开启WiFi…</string>
+    <string name="common.wifi_enabled">WiFi已开启</string>
+    <string name="common.please_select_wifi">请选择WiFi</string>
+    <string name="common.connect_to">连接到</string>
+    <string name="common.match">开始配对</string>
+    <string name="common.matching">配对中…</string>
+    <string name="common.camera">摄像头</string>
+    <string name="common.band">手环</string>
+
+    <string name="tip.enable_wifi">请开启WiFi</string>
+    <string name="tip.enable_wifi_detail">手机需要通过WiFi与手环和摄像头配对</string>
+    <string name="tip.connect_to">连接到%s</string>
+    <string name="tip.client_wifi">%s将要连接的WiFi</string>
+    <string name="tip.match_success">%s配对成功</string>
 
     <string name="alert.fall">您的老人可能摔倒了！</string>
 
@@ -29,4 +49,9 @@
     <string name="error.auth.register_failed">注册失败，用户名或者邮箱已被注册！</string>
     <string name="error.auth.expired">登录信息失效，请重新登陆！</string>
     <string name="error.data.not_found">未找到此时间段内的数据！</string>
+    <string name="error.wifi.eap_not_supported">对不起，本程序暂不支持EAP网络！</string>
+    <string name="error.wifi.cannot_connect_to">无法连接到%s，请检查密码是否正确！</string>
+    <string name="error.wifi.permission_granted">未授予WiFi操作权限，无法继续配对！</string>
+    <string name="error.wifi.permission_granted_2">未授予相关操作权限，无法获取WiFi列表！</string>
+
 </resources>

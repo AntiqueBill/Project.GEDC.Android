@@ -4,7 +4,11 @@
     tools:context="cn.edu.hit.project.ec.OverviewActivity">
     <item
         android:id="@+id/action_camera"
-        android:title="@string/common.camera"
+        android:title="@string/title.camera"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_match"
+        android:title="@string/title.match"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_logout"

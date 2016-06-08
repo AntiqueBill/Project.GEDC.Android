@@ -11,7 +11,7 @@ import java.util.List;
 
 import cn.edu.hit.project.ec.R;
 
-public class ListAdapter extends BaseAdapter {
+public class DataListAdapter extends BaseAdapter {
     private LayoutInflater mInflater = null;
     private List<String> labels;
     private List<Float> values;
@@ -29,7 +29,7 @@ public class ListAdapter extends BaseAdapter {
         }
     }
 
-    public ListAdapter(Context context, List<String> labels, List<Float> values, String unit) {
+    public DataListAdapter(Context context, List<String> labels, List<Float> values, String unit) {
         mInflater = LayoutInflater.from(context);
         this.labels = labels;
         this.values = values;

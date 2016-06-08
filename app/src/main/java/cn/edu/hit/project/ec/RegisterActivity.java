@@ -9,6 +9,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Patterns;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,6 +38,9 @@ public class RegisterActivity extends AppCompatActivity implements LoaderManager
         setContentView(R.layout.activity_register);
         rootView = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         ButterKnife.bind(this);
     }
