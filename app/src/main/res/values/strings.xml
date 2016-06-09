@@ -53,5 +53,7 @@
     <string name="error.wifi.cannot_connect_to">无法连接到%s，请检查密码是否正确！</string>
     <string name="error.wifi.permission_granted">未授予WiFi操作权限，无法继续配对！</string>
     <string name="error.wifi.permission_granted_2">未授予相关操作权限，无法获取WiFi列表！</string>
+    <string name="error.match.enter_device_failed">配对失败，无法与%s设备通信！</string>
+    <string name="error.match.exec_commands_failed">配对失败，未能在%s设备内完成配置！</string>
 
 </resources>

@@ -8,18 +8,18 @@ import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
+import android.text.format.Formatter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -49,7 +49,7 @@ public class MatchWifiFragment extends Fragment {
     private OnWifiMatchedListener mListener;
 
     public interface OnWifiMatchedListener {
-        void onWifiMatched(ScanResult wifi, String password);
+        void onWifiMatched(String ip, ScanResult wifi, String password);
     }
 
     public MatchWifiFragment() {}
@@ -67,11 +67,14 @@ public class MatchWifiFragment extends Fragment {
                 if (!enableCheck || mHostWifi == null || mListener == null) {
                     return;
                 }
+                WifiInfo info = mWifiManager.getConnectionInfo();
                 String SSID = mHostWifi.SSID;
                 String altSSID = String.format("\"%s\"", SSID);
-                String curSSID = mWifiManager.getConnectionInfo().getSSID();
+                String curSSID = info.getSSID();
                 if (mWifiManager.isWifiEnabled() && (SSID.equals(curSSID) || altSSID.equals(curSSID))) {
-                    mListener.onWifiMatched(mClientWifi, mClientWifiPassword);
+                    mListener.onWifiMatched(
+                            Formatter.formatIpAddress(info.getIpAddress()),
+                            mClientWifi, mClientWifiPassword);
                     enableCheck = false;
                 }
             }
@@ -150,6 +153,7 @@ public class MatchWifiFragment extends Fragment {
 
     @OnClick(R.id.match)
     public void OnMatchClient() {
+        boolean connectResult = false;
         if (mListener != null) {
             match.setEnabled(false);
             match.setText(getString(R.string.common_matching));
@@ -157,19 +161,26 @@ public class MatchWifiFragment extends Fragment {
             if (configuration == null) {
                 return;
             }
-            mWifiManager.addNetwork(configuration);
-            List<WifiConfiguration> list = mWifiManager.getConfiguredNetworks();
-            for( WifiConfiguration i : list ) {
+            // Clear existed network with same SSID
+            for(WifiConfiguration i : mWifiManager.getConfiguredNetworks() ) {
                 if(i.SSID != null && i.SSID.equals("\"" + mHostWifi.SSID + "\"")) {
-                    mWifiManager.disconnect();
-                    enableCheck = true;
-                    mWifiManager.enableNetwork(i.networkId, true);
-                    mWifiManager.reconnect();
-                    return;
+                    mWifiManager.removeNetwork(i.networkId);
                 }
             }
-            enableCheck = false;
-            Snackbar.make(rootView, String.format(getString(R.string.error_data_not_found), mHostWifi.SSID), Snackbar.LENGTH_LONG).show();
+            mWifiManager.addNetwork(configuration);
+            for(WifiConfiguration i : mWifiManager.getConfiguredNetworks() ) {
+                if(i.SSID != null && i.SSID.equals("\"" + mHostWifi.SSID + "\"")) {
+                    enableCheck = true;
+                    mWifiManager.disconnect();
+                    mWifiManager.enableNetwork(i.networkId, true);
+                    connectResult = mWifiManager.reconnect();
+                    break;
+                }
+            }
+            if (!connectResult) {
+                enableCheck = false;
+                Snackbar.make(rootView, String.format(getString(R.string.error_wifi_cannot_connect_to), mHostWifi.SSID), Snackbar.LENGTH_LONG).show();
+            }
         }
     }
 }

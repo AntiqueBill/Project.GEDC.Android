@@ -6,6 +6,10 @@ android {
     compileSdkVersion 23
     buildToolsVersion '23.0.2'
 
+    packagingOptions {
+        exclude 'META-INF/BCKEY.SF'
+        exclude 'META-INF/BCKEY.DSA'
+    }
     defaultConfig {
         applicationId 'cn.edu.hit.project.ec'
         minSdkVersion 16
@@ -50,4 +54,5 @@ dependencies {
     compile 'joda-time:joda-time:2.9.4'
     compile 'com.pusher:pusher-java-client:1.0.0'
     compile 'com.jakewharton:butterknife:8.0.1'
+    compile 'com.jcraft:jsch:0.1.53'
 }

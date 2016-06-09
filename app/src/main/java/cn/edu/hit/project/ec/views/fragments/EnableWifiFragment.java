@@ -1,20 +1,14 @@
 package cn.edu.hit.project.ec.views.fragments;
 
-import android.Manifest;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.pm.PackageManager;
 import android.net.ConnectivityManager;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +20,6 @@ import butterknife.OnClick;
 import cn.edu.hit.project.ec.R;
 
 public class EnableWifiFragment extends Fragment {
-    private final static int REQUEST_NETWORK_PERMISSIONS = 0;
 
     @BindView(R.id.enableWifi) public Button enableWifi;
     private View rootView;
@@ -87,34 +80,12 @@ public class EnableWifiFragment extends Fragment {
     @OnClick(R.id.enableWifi)
     public void onEnableWifiClick(View view) {
         if (!mWifiManager.isWifiEnabled()) {
-            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_WIFI_STATE) != PackageManager.PERMISSION_GRANTED ||
-                    ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.CHANGE_WIFI_STATE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(getActivity(), new String[]{
-                        Manifest.permission.ACCESS_WIFI_STATE,
-                        Manifest.permission.CHANGE_WIFI_STATE
-                }, REQUEST_NETWORK_PERMISSIONS);
-            } else {
-                mWifiManager.setWifiEnabled(true);
-            }
+            mWifiManager.setWifiEnabled(true);
         }
         enableWifi.setText(getString(R.string.common_wifi_enabling));
     }
 
     public void setOnWifiEnabledListener(OnWifiEnabledListener listener) {
         this.mListener = listener;
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        switch (requestCode) {
-            case REQUEST_NETWORK_PERMISSIONS:
-                for (int i: grantResults) {
-                    if (i != PackageManager.PERMISSION_GRANTED) {
-                        Snackbar.make(rootView, getString(R.string.error_wifi_permission_granted), Snackbar.LENGTH_LONG).show();
-                        return;
-                    }
-                }
-                mWifiManager.setWifiEnabled(true);
-        }
     }
 }

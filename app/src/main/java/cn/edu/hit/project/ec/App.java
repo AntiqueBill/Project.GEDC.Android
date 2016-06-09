@@ -9,9 +9,10 @@ import io.realm.Realm;
 import io.realm.RealmConfiguration;
 
 public class App extends Application {
+    public final static String API_SERVER = "123.206.59.206:8081";
+    public final static String STREAM_SERVER = "115.28.134.90";
     public final static long SESSION_ID = System.currentTimeMillis();
 
-    private User user;
     private int sensorId;
     private String apiToken;
 
@@ -30,7 +31,6 @@ public class App extends Application {
     }
 
     public void setUser(User user) {
-        this.user = user;
         sensorId = user.id;
         apiToken = user.apiToken;
     }

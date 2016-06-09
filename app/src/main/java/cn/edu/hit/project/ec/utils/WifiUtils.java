@@ -17,6 +17,17 @@ public class WifiUtils {
         return WifiSecurityType.NONE;
     }
 
+    public static String getWifiSecurityString(ScanResult wifi) {
+        if (wifi.capabilities.contains("WEP")) {
+            return "WEP";
+        } else if (wifi.capabilities.contains("PSK")) {
+            return "WPA/WPA2 PSK";
+        } else if (wifi.capabilities.contains("EAP")) {
+            return "EAP";
+        }
+        return "NONE";
+    }
+
     public static WifiConfiguration getWifiConfiguration(ScanResult wifi, String password) {
         WifiConfiguration conf = new WifiConfiguration();
         conf.SSID = "\"" + wifi.SSID + "\"";
