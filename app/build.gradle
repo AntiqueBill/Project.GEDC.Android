@@ -54,5 +54,8 @@ dependencies {
     compile 'joda-time:joda-time:2.9.4'
     compile 'com.pusher:pusher-java-client:1.0.0'
     compile 'com.jakewharton:butterknife:8.0.1'
+<<<<<<< HEAD
     compile 'com.jcraft:jsch:0.1.53'
+=======
+>>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 }

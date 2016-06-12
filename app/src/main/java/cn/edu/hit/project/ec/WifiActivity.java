@@ -1,11 +1,15 @@
 package cn.edu.hit.project.ec;
 
+<<<<<<< HEAD
 import android.Manifest;
+=======
+>>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+<<<<<<< HEAD
 import android.content.pm.PackageManager;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
@@ -15,6 +19,13 @@ import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+=======
+import android.net.wifi.ScanResult;
+import android.net.wifi.WifiManager;
+import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.support.design.widget.TextInputLayout;
+>>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -35,8 +46,11 @@ import cn.edu.hit.project.ec.utils.WifiUtils;
 import cn.edu.hit.project.ec.views.adapters.WifiListAdapter;
 
 public class WifiActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
+<<<<<<< HEAD
     private final static int REQUEST_NETWORK_PERMISSIONS = 0;
 
+=======
+>>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
     @BindView(R.id.list) public ListView mList;
 
     private WifiManager mWifiManager;
@@ -59,6 +73,10 @@ public class WifiActivity extends AppCompatActivity implements AdapterView.OnIte
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mWifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
+<<<<<<< HEAD
+=======
+        mWifiManager.startScan();
+>>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 
         mWifiNames = new ArrayList<>();
         mWifiSignalLevels = new ArrayList<>();
@@ -80,6 +98,7 @@ public class WifiActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         };
 
+<<<<<<< HEAD
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, REQUEST_NETWORK_PERMISSIONS);
         } else {
@@ -89,6 +108,9 @@ public class WifiActivity extends AppCompatActivity implements AdapterView.OnIte
             registerReceiver(mWifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
             mWifiManager.startScan();
         }
+=======
+        registerReceiver(mWifiReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+>>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 
         mListAdapter = new WifiListAdapter(this, mWifiNames, mWifiSignalLevels, mWifiLocks);
         mList.setAdapter(mListAdapter);
@@ -108,9 +130,13 @@ public class WifiActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     protected void onDestroy() {
         super.onDestroy();
+<<<<<<< HEAD
         try {
             unregisterReceiver(mWifiReceiver);
         } catch (IllegalArgumentException ignored) {}
+=======
+        unregisterReceiver(mWifiReceiver);
+>>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
     }
 
     public void returnResult(ScanResult wifi, String password) {
@@ -149,6 +175,7 @@ public class WifiActivity extends AppCompatActivity implements AdapterView.OnIte
         builder.setNegativeButton(getString(R.string.common_cancel), null);
         builder.show();
     }
+<<<<<<< HEAD
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
@@ -168,4 +195,6 @@ public class WifiActivity extends AppCompatActivity implements AdapterView.OnIte
                 mWifiManager.startScan();
         }
     }
+=======
+>>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 }

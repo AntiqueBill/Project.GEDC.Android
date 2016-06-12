@@ -4,13 +4,17 @@ import android.content.Context;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
+<<<<<<< HEAD
 import android.os.Handler;
 import android.os.Message;
+=======
+>>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+<<<<<<< HEAD
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -18,19 +22,29 @@ import java.util.regex.Matcher;
 
 import cn.edu.hit.project.ec.network.CameraSshService;
 import cn.edu.hit.project.ec.utils.WifiUtils;
+=======
+import android.view.ViewGroup;
+
+>>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 import cn.edu.hit.project.ec.views.fragments.EnableWifiFragment;
 import cn.edu.hit.project.ec.views.fragments.MatchWifiFragment;
 
 public class MatchActivity extends AppCompatActivity
         implements EnableWifiFragment.OnWifiEnabledListener, MatchWifiFragment.OnWifiMatchedListener {
     private int step;
+<<<<<<< HEAD
     private View rootView;
+=======
+>>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_match);
+<<<<<<< HEAD
         rootView = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+=======
+>>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -91,6 +105,7 @@ public class MatchActivity extends AppCompatActivity
     }
 
     @Override
+<<<<<<< HEAD
     public void onWifiMatched(String ip, ScanResult wifi, String password) {
         switch (step - 1) {
             case 1: setCamera(wifi, password); break;
@@ -127,5 +142,17 @@ public class MatchActivity extends AppCompatActivity
                 Snackbar.make(rootView, String.format(message, getString(R.string.common_camera)), Snackbar.LENGTH_LONG).show();
             }
         })).start();
+=======
+    public void onWifiMatched(ScanResult wifi, String password) {
+        String deviceType = null;
+        switch (step - 1) {
+            case 1: deviceType = getString(R.string.common_band); break;
+            case 2: deviceType = getString(R.string.common_camera); break;
+            default: return;
+        }
+        ViewGroup rootView = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+        Snackbar.make(rootView, String.format(getString(R.string.tip_match_success), deviceType), Snackbar.LENGTH_LONG).show();
+        next();
+>>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
     }
 }
