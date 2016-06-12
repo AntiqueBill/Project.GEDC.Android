@@ -26,10 +26,7 @@ import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
-<<<<<<< HEAD
-=======
 import butterknife.ButterKnife;
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 import cn.edu.hit.project.ec.loaders.data.BaseDataLoader;
 import cn.edu.hit.project.ec.loaders.data.DailyDataLoader;
 import cn.edu.hit.project.ec.loaders.data.HourlyDataLoader;
@@ -59,13 +56,8 @@ public class DataActivity extends AppCompatActivity
 
     @BindView(R.id.chartCard) public CardView mChartCard;
     @BindView(R.id.listCard) public CardView mListCard;
-<<<<<<< HEAD
-    @BindView(R.id.chart) public ListView mList;
-    @BindView(R.id.list) public ValueLineChart mChart;
-=======
     @BindView(R.id.list) public ListView mList;
     @BindView(R.id.chart) public ValueLineChart mChart;
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,11 +68,8 @@ public class DataActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-<<<<<<< HEAD
-=======
         ButterKnife.bind(this);
 
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
         mChartCard.setVisibility(View.GONE);
         mListCard.setVisibility(View.GONE);
         mList.setOnItemClickListener(this);

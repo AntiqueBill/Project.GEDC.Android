@@ -2,11 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.edu.hit.project.ec">
 
-<<<<<<< HEAD
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-=======
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -28,16 +24,11 @@
             android:name=".LoginActivity"
             android:label="@string/common.login"
             android:theme="@style/AppTheme.NoActionBar">
-<<<<<<< HEAD
-
-=======
             <intent-filter android:label="@string/common.app.name">
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
         </activity>
         <activity
             android:name=".RegisterActivity"
@@ -60,14 +51,6 @@
             android:name=".MatchActivity"
             android:label="@string/title.match"
             android:theme="@style/AppTheme.NoActionBar">
-<<<<<<< HEAD
-            <intent-filter android:label="@string/common.app.name">
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-=======
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
         </activity>
         <activity
             android:name=".WifiActivity"

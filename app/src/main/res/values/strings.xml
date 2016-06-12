@@ -51,12 +51,9 @@
     <string name="error.data.not_found">未找到此时间段内的数据！</string>
     <string name="error.wifi.eap_not_supported">对不起，本程序暂不支持EAP网络！</string>
     <string name="error.wifi.cannot_connect_to">无法连接到%s，请检查密码是否正确！</string>
-<<<<<<< HEAD
     <string name="error.wifi.permission_granted">未授予WiFi操作权限，无法继续配对！</string>
     <string name="error.wifi.permission_granted_2">未授予相关操作权限，无法获取WiFi列表！</string>
     <string name="error.match.enter_device_failed">配对失败，无法与%s设备通信！</string>
     <string name="error.match.exec_commands_failed">配对失败，未能在%s设备内完成配置！</string>
-=======
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 
 </resources>

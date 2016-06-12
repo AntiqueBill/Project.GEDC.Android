@@ -6,35 +6,21 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.net.ConnectivityManager;
-<<<<<<< HEAD
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiInfo;
-=======
-import android.net.NetworkInfo;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiConfiguration;
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
-<<<<<<< HEAD
 import android.text.format.Formatter;
-=======
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-<<<<<<< HEAD
-=======
-import java.util.List;
-
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -58,20 +44,12 @@ public class MatchWifiFragment extends Fragment {
     private String mHostWifiPassword;
     private ScanResult mClientWifi;
     private String mClientWifiPassword;
-<<<<<<< HEAD
     private WifiManager mWifiManager;
-=======
-    private WifiManager wifiManager;
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
     private BroadcastReceiver mReceiver;
     private OnWifiMatchedListener mListener;
 
     public interface OnWifiMatchedListener {
-<<<<<<< HEAD
         void onWifiMatched(String ip, ScanResult wifi, String password);
-=======
-        void onWifiMatched(ScanResult wifi, String password);
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
     }
 
     public MatchWifiFragment() {}
@@ -80,11 +58,7 @@ public class MatchWifiFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-<<<<<<< HEAD
         mWifiManager = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
-=======
-        wifiManager = (WifiManager) getActivity().getSystemService(Context.WIFI_SERVICE);
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
 
         mReceiver = new BroadcastReceiver() {
 
@@ -93,7 +67,6 @@ public class MatchWifiFragment extends Fragment {
                 if (!enableCheck || mHostWifi == null || mListener == null) {
                     return;
                 }
-<<<<<<< HEAD
                 WifiInfo info = mWifiManager.getConnectionInfo();
                 String SSID = mHostWifi.SSID;
                 String altSSID = String.format("\"%s\"", SSID);
@@ -102,13 +75,6 @@ public class MatchWifiFragment extends Fragment {
                     mListener.onWifiMatched(
                             Formatter.formatIpAddress(info.getIpAddress()),
                             mClientWifi, mClientWifiPassword);
-=======
-                ConnectivityManager conMan = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo netInfo = conMan.getActiveNetworkInfo();
-                String destSSID = String.format("\"%s\"", mHostWifi.SSID);
-                if (netInfo != null && netInfo.getType() == ConnectivityManager.TYPE_WIFI && destSSID.equals(netInfo.getExtraInfo())) {
-                    mListener.onWifiMatched(mClientWifi, mClientWifiPassword);
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
                     enableCheck = false;
                 }
             }
@@ -187,10 +153,7 @@ public class MatchWifiFragment extends Fragment {
 
     @OnClick(R.id.match)
     public void OnMatchClient() {
-<<<<<<< HEAD
         boolean connectResult = false;
-=======
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
         if (mListener != null) {
             match.setEnabled(false);
             match.setText(getString(R.string.common_matching));
@@ -198,7 +161,6 @@ public class MatchWifiFragment extends Fragment {
             if (configuration == null) {
                 return;
             }
-<<<<<<< HEAD
             // Clear existed network with same SSID
             for(WifiConfiguration i : mWifiManager.getConfiguredNetworks() ) {
                 if(i.SSID != null && i.SSID.equals("\"" + mHostWifi.SSID + "\"")) {
@@ -219,21 +181,6 @@ public class MatchWifiFragment extends Fragment {
                 enableCheck = false;
                 Snackbar.make(rootView, String.format(getString(R.string.error_wifi_cannot_connect_to), mHostWifi.SSID), Snackbar.LENGTH_LONG).show();
             }
-=======
-            wifiManager.addNetwork(configuration);
-            List<WifiConfiguration> list = wifiManager.getConfiguredNetworks();
-            for( WifiConfiguration i : list ) {
-                if(i.SSID != null && i.SSID.equals("\"" + mHostWifi.SSID + "\"")) {
-                    wifiManager.disconnect();
-                    enableCheck = true;
-                    wifiManager.enableNetwork(i.networkId, true);
-                    wifiManager.reconnect();
-                    return;
-                }
-            }
-            enableCheck = false;
-            Snackbar.make(rootView, String.format(getString(R.string.error_data_not_found), mHostWifi.SSID), Snackbar.LENGTH_LONG).show();
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
         }
     }
 }

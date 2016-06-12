@@ -17,7 +17,6 @@ public class WifiUtils {
         return WifiSecurityType.NONE;
     }
 
-<<<<<<< HEAD
     public static String getWifiSecurityString(ScanResult wifi) {
         if (wifi.capabilities.contains("WEP")) {
             return "WEP";
@@ -29,8 +28,6 @@ public class WifiUtils {
         return "NONE";
     }
 
-=======
->>>>>>> e504fc4cb061d82be55349a32b3791fb9376ba73
     public static WifiConfiguration getWifiConfiguration(ScanResult wifi, String password) {
         WifiConfiguration conf = new WifiConfiguration();
         conf.SSID = "\"" + wifi.SSID + "\"";
