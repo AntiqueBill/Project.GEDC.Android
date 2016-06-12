@@ -7,6 +7,7 @@ import android.support.design.widget.Snackbar;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +25,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.edu.hit.project.ec.loaders.data.BaseDataLoader;
 import cn.edu.hit.project.ec.loaders.data.DailyDataLoader;
 import cn.edu.hit.project.ec.loaders.data.HourlyDataLoader;
@@ -36,7 +39,7 @@ import cn.edu.hit.project.ec.models.data.BaseData;
 import cn.edu.hit.project.ec.models.user.User;
 import cn.edu.hit.project.ec.utils.DateUtils;
 import cn.edu.hit.project.ec.utils.ViewUtils;
-import cn.edu.hit.project.ec.views.adapters.ListAdapter;
+import cn.edu.hit.project.ec.views.adapters.DataListAdapter;
 import cn.edu.hit.project.ec.views.builders.ChartBuilder;
 
 public class DataActivity extends AppCompatActivity
@@ -51,8 +54,10 @@ public class DataActivity extends AppCompatActivity
     private DateFormat mDateFormat;
     private List<BaseData> mDataList;
 
-    private ListView mList;
-    private ValueLineChart mChart;
+    @BindView(R.id.chartCard) public CardView mChartCard;
+    @BindView(R.id.listCard) public CardView mListCard;
+    @BindView(R.id.list) public ListView mList;
+    @BindView(R.id.chart) public ValueLineChart mChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,10 +68,10 @@ public class DataActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mChart = (ValueLineChart) findViewById(R.id.chart);
-        mList = (ListView) findViewById(R.id.list);
-        mChart.setVisibility(View.GONE);
-        mList.setVisibility(View.GONE);
+        ButterKnife.bind(this);
+
+        mChartCard.setVisibility(View.GONE);
+        mListCard.setVisibility(View.GONE);
         mList.setOnItemClickListener(this);
 
         mDataList = new ArrayList<>();
@@ -150,11 +155,11 @@ public class DataActivity extends AppCompatActivity
                         case TEM: values.add((float) d.getTem()); break;
                     }
                 }
-                mList.setAdapter(new ListAdapter(this, labels, values, mUnit));
+                mList.setAdapter(new DataListAdapter(this, labels, values, mUnit));
                 ViewUtils.resetListViewHeight(mList);
                 if (mDataList.size() > 0) {
-                    mChart.setVisibility(View.VISIBLE);
-                    mList.setVisibility(View.VISIBLE);
+                    mChartCard.setVisibility(View.VISIBLE);
+                    mListCard.setVisibility(View.VISIBLE);
                     return;
                 }
             }

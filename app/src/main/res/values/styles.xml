@@ -1,13 +1,12 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/color.primary</item>
         <item name="colorPrimaryDark">@color/color.primary.dark</item>
         <item name="colorAccent">@color/color.accent</item>
         <item name="colorControlNormal">@color/color.divider</item>
         <item name="android:textColorHint">@color/text.hint</item>
+        <item name="alertDialogTheme">@style/AppTheme.Dialog</item>
     </style>
 
     <style name="AppTheme.NoActionBar">
@@ -41,6 +40,11 @@
     <style name="AppTheme.Button" parent="ThemeOverlay.AppCompat.Light">
         <item name="colorButtonNormal">@color/color.primary.dark</item>
         <item name="colorAccent">@color/color.accent</item>
+    </style>
+
+    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorAccent">@color/color.accent</item>
+        <item name="android:textColorPrimary">@color/text.primary</item>
     </style>
 
 </resources>

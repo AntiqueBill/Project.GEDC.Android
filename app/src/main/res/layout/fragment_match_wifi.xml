@@ -1,0 +1,148 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.fragments.MatchWifiFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/hostWifiTip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/cardview.margin"
+                android:layout_marginLeft="@dimen/cardview.margin"
+                android:layout_marginRight="@dimen/cardview.margin"
+                style="@style/TextAppearance.AppCompat.Caption"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/cardview.margin.slim"
+                android:layout_marginLeft="@dimen/cardview.margin"
+                android:layout_marginRight="@dimen/cardview.margin"
+                android:layout_marginBottom="@dimen/cardview.margin"
+                app:cardCornerRadius="@dimen/cardview.radius">
+
+                <LinearLayout
+                    android:id="@+id/hostWifi"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="@dimen/listview.padding.vertical.slim"
+                    android:paddingBottom="@dimen/listview.padding.vertical.slim"
+                    android:paddingLeft="@dimen/listview.padding.horizontal"
+                    android:paddingRight="@dimen/listview.padding.horizontal.slim"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/hostWifiText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/common.please_select_wifi"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_keyboard_arrow_right_grey_24dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/clientWifiTip"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/cardview.margin.slim"
+                android:layout_marginLeft="@dimen/cardview.margin"
+                android:layout_marginRight="@dimen/cardview.margin"
+                style="@style/TextAppearance.AppCompat.Caption"/>
+
+            <android.support.v7.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/cardview.margin.slim"
+                android:layout_marginLeft="@dimen/cardview.margin"
+                android:layout_marginRight="@dimen/cardview.margin"
+                android:layout_marginBottom="@dimen/cardview.margin"
+                app:cardCornerRadius="@dimen/cardview.radius">
+
+                <LinearLayout
+                    android:id="@+id/clientWifi"
+                    android:clickable="true"
+                    android:background="?attr/selectableItemBackground"
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:paddingTop="@dimen/listview.padding.vertical.slim"
+                    android:paddingBottom="@dimen/listview.padding.vertical.slim"
+                    android:paddingLeft="@dimen/listview.padding.horizontal"
+                    android:paddingRight="@dimen/listview.padding.horizontal.slim"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:id="@+id/clientWifiText"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/common.please_select_wifi"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="right|center_vertical">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/ic_keyboard_arrow_right_grey_24dp"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </android.support.v7.widget.CardView>
+
+        </LinearLayout>
+
+        <Button
+            android:id="@+id/match"
+            android:enabled="false"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/common.match"
+            android:theme="@style/AppTheme.Button"
+            android:layout_marginTop="@dimen/cardview.margin.slim"
+            android:layout_marginLeft="@dimen/cardview.margin"
+            android:layout_marginRight="@dimen/cardview.margin"
+            android:layout_marginBottom="@dimen/cardview.margin"
+            style="@style/Widget.AppCompat.Button.Colored" />
+
+    </LinearLayout>
+
+</ScrollView>

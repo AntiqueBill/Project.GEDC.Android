@@ -9,6 +9,7 @@ import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -35,6 +36,9 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         setContentView(R.layout.activity_login);
         rootView = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
 
         Intent intent = getIntent();
         if (intent != null && intent.getBooleanExtra("EXPIRED", false)) {

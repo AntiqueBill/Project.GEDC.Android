@@ -2,6 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="cn.edu.hit.project.ec">
 
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
@@ -18,34 +21,41 @@
             android:exported="false" />
 
         <activity
+            android:name=".LoginActivity"
             android:label="@string/common.login"
-            android:name=".LoginActivity">
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter android:label="@string/common.app.name">
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
+            android:name=".RegisterActivity"
             android:label="@string/common.register"
-            android:name=".RegisterActivity"/>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".OverviewActivity"
             android:label="@string/title.overview"
             android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".DataActivity"
             android:label="@string/title.data"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
-            android:label="@string/common.camera"
             android:name=".VideoActivity"
+            android:label="@string/title.camera"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen" />
+        <activity
+            android:name=".MatchActivity"
+            android:label="@string/title.match"
+            android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity
+            android:name=".WifiActivity"
+            android:label="@string/title.select_wifi"
+            android:theme="@style/AppTheme.NoActionBar"/>
     </application>
 
 </manifest>
