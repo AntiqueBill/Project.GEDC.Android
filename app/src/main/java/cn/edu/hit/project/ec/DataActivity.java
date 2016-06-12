@@ -26,6 +26,7 @@ import java.util.List;
 import java.util.Locale;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
 import cn.edu.hit.project.ec.loaders.data.BaseDataLoader;
 import cn.edu.hit.project.ec.loaders.data.DailyDataLoader;
 import cn.edu.hit.project.ec.loaders.data.HourlyDataLoader;
@@ -55,8 +56,8 @@ public class DataActivity extends AppCompatActivity
 
     @BindView(R.id.chartCard) public CardView mChartCard;
     @BindView(R.id.listCard) public CardView mListCard;
-    @BindView(R.id.chart) public ListView mList;
-    @BindView(R.id.list) public ValueLineChart mChart;
+    @BindView(R.id.list) public ListView mList;
+    @BindView(R.id.chart) public ValueLineChart mChart;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,6 +67,8 @@ public class DataActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        ButterKnife.bind(this);
 
         mChartCard.setVisibility(View.GONE);
         mListCard.setVisibility(View.GONE);

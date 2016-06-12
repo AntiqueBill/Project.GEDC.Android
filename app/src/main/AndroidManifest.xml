@@ -24,6 +24,11 @@
             android:name=".LoginActivity"
             android:label="@string/common.login"
             android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter android:label="@string/common.app.name">
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
 
         </activity>
         <activity
@@ -47,11 +52,6 @@
             android:name=".MatchActivity"
             android:label="@string/title.match"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter android:label="@string/common.app.name">
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
         </activity>
         <activity
             android:name=".WifiActivity"
