@@ -39,6 +39,7 @@
     <string name="tip.connect_to">连接到%s</string>
     <string name="tip.client_wifi">%s将要连接的WiFi</string>
     <string name="tip.match_success">%s配对成功</string>
+    <string name="tip.match_complete">配对完成</string>
 
     <string name="alert.fall">您的老人可能摔倒了！</string>
 
@@ -53,7 +54,9 @@
     <string name="error.wifi.cannot_connect_to">无法连接到%s，请检查密码是否正确！</string>
     <string name="error.wifi.permission_granted">未授予WiFi操作权限，无法继续配对！</string>
     <string name="error.wifi.permission_granted_2">未授予相关操作权限，无法获取WiFi列表！</string>
-    <string name="error.match.enter_device_failed">配对失败，无法与%s设备通信！</string>
+    <string name="error.match.failed_to_connect_to_device">配对失败，无法连接到%s设备！</string>
+    <string name="error.match.match_action_refused">配对失败，%s设备拒绝了配对请求！</string>
     <string name="error.match.exec_commands_failed">配对失败，未能在%s设备内完成配置！</string>
+    <string name="error.match.unknown_match_error">配对失败，配对%s时发生未知错误！</string>
 
 </resources>
