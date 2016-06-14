@@ -21,12 +21,14 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 import cn.edu.hit.project.ec.loaders.user.LoginLoader;
 import cn.edu.hit.project.ec.models.user.User;
+import cn.edu.hit.project.ec.network.NetworkStateMonitor;
 
-public class LoginActivity extends AppCompatActivity implements LoaderManager.LoaderCallbacks<User> {
-    private ViewGroup rootView;
-    @BindView(R.id.name) public TextInputLayout name;
-    @BindView(R.id.password) public TextInputLayout password;
-    @BindView(R.id.login) public Button login;
+public class LoginActivity extends AppCompatActivity
+        implements LoaderManager.LoaderCallbacks<User>, NetworkStateMonitor.OnNetworkStateChangeListener {
+    private View mRootView;
+    @BindView(R.id.name) public TextInputLayout etName;
+    @BindView(R.id.password) public TextInputLayout etPassword;
+    @BindView(R.id.login) public Button btnLogin;
 
     private SharedPreferences preferences;
 
@@ -34,7 +36,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        rootView = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+        mRootView = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -42,7 +44,7 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
         Intent intent = getIntent();
         if (intent != null && intent.getBooleanExtra("EXPIRED", false)) {
-            Snackbar.make(rootView, getString(R.string.error_auth_expired), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(mRootView, getString(R.string.error_auth_expired), Snackbar.LENGTH_LONG).show();
         }
 
         ButterKnife.bind(this);
@@ -62,6 +64,19 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        NetworkStateMonitor.registerListener(this);
+        NetworkStateMonitor.checkNetworkState(this);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        NetworkStateMonitor.unregisterListener(this);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
@@ -78,8 +93,8 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
         return new LoginLoader(LoginActivity.this, args.getString("name"), args.getString("password")) {
             @Override
             protected void onStartLoading() {
-                login.setEnabled(false);
-                login.setText(getString(R.string.common_logining));
+                btnLogin.setEnabled(false);
+                btnLogin.setText(getString(R.string.common_logining));
                 super.onStartLoading();
             }
         };
@@ -87,15 +102,15 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
     @Override
     public void onLoadFinished(Loader<User> loader, User user) {
-        login.setEnabled(true);
-        login.setText(getString(R.string.common_login));
+        btnLogin.setEnabled(true);
+        btnLogin.setText(getString(R.string.common_login));
         if (user != null) {
             user.save(preferences);
             ((App) getApplication()).setUser(user);
             startActivity(new Intent(this, OverviewActivity.class));
             finish();
         } else {
-            Snackbar.make(rootView, getString(R.string.error_auth_wrong_username_or_password), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(mRootView, getString(R.string.error_auth_wrong_username_or_password), Snackbar.LENGTH_LONG).show();
         }
     }
 
@@ -106,15 +121,29 @@ public class LoginActivity extends AppCompatActivity implements LoaderManager.Lo
 
     @OnClick(R.id.login)
     public void onLoginClick(View view) {
-        String name = this.name.getEditText().getText().toString();
-        String password = this.password.getEditText().getText().toString();
+        String name = etName.getEditText().getText().toString();
+        String password = etPassword.getEditText().getText().toString();
         if (name.equals("") || password.equals("")) {
-            Snackbar.make(rootView, getString(R.string.error_auth_empty_username_or_password), Snackbar.LENGTH_LONG).show();
+            Snackbar.make(mRootView, getString(R.string.error_auth_empty_username_or_password), Snackbar.LENGTH_LONG).show();
             return;
         }
         Bundle args = new Bundle();
         args.putString("name", name);
         args.putString("password", password);
         getSupportLoaderManager().restartLoader(0, args, this);
+    }
+
+    @Override
+    public void onConnect() {
+        Loader loader = getSupportLoaderManager().getLoader(0);
+        if (loader == null || !loader.isStarted()) {
+            btnLogin.setEnabled(true);
+        }
+    }
+
+    @Override
+    public void onDisconnect() {
+        btnLogin.setEnabled(false);
+        Snackbar.make(mRootView, getString(R.string.error_no_network), Snackbar.LENGTH_LONG).show();
     }
 }

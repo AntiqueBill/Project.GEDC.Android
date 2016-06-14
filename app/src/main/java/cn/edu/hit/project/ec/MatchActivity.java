@@ -32,7 +32,6 @@ public class MatchActivity extends AppCompatActivity
 
         WifiManager wifiManager = (WifiManager) getSystemService(Context.WIFI_SERVICE);
         step = wifiManager.isWifiEnabled() ? 1 : 0;
-//        step = 3;
         next();
     }
 

@@ -3,6 +3,7 @@
     package="cn.edu.hit.project.ec">
 
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -19,6 +20,15 @@
             android:name=".services.NotificationService"
             android:enabled="true"
             android:exported="false" />
+
+        <receiver
+            android:name=".network.NetworkStateMonitor"
+            android:enabled="true"
+            android:label="@string/title.network_state_monitor">
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE"/>
+            </intent-filter>
+        </receiver>
 
         <activity
             android:name=".LoginActivity"

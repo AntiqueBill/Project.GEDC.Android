@@ -77,6 +77,7 @@ public class WifiActivity extends AppCompatActivity implements AdapterView.OnIte
                     mWifiLocks.add(WifiUtils.getWifiSecurity(wifi) != WifiSecurityType.NONE);
                 }
                 mListAdapter.notifyDataSetChanged();
+                ViewUtils.resetListViewHeight(mList);
             }
         };
 

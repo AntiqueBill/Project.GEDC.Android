@@ -37,6 +37,7 @@ import cn.edu.hit.project.ec.models.base.DataScale;
 import cn.edu.hit.project.ec.models.base.DataType;
 import cn.edu.hit.project.ec.models.data.BaseData;
 import cn.edu.hit.project.ec.models.user.User;
+import cn.edu.hit.project.ec.network.NetworkStateMonitor;
 import cn.edu.hit.project.ec.utils.DateUtils;
 import cn.edu.hit.project.ec.utils.ViewUtils;
 import cn.edu.hit.project.ec.views.adapters.DataListAdapter;
@@ -45,7 +46,8 @@ import cn.edu.hit.project.ec.views.builders.ChartBuilder;
 public class DataActivity extends AppCompatActivity
         implements LoaderManager.LoaderCallbacks,
                 AdapterView.OnItemClickListener,
-                BaseDataLoader.OnLoadFailedListener {
+                BaseDataLoader.OnLoadFailedListener,
+                NetworkStateMonitor.OnNetworkStateChangeListener {
     private String mUnit;
     private Date mDateTo;
     private Date mDateFrom;
@@ -58,6 +60,7 @@ public class DataActivity extends AppCompatActivity
     @BindView(R.id.listCard) public CardView mListCard;
     @BindView(R.id.list) public ListView mList;
     @BindView(R.id.chart) public ValueLineChart mChart;
+    private View mRootView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,6 +70,8 @@ public class DataActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+        mRootView = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
 
         ButterKnife.bind(this);
 
@@ -105,24 +110,27 @@ public class DataActivity extends AppCompatActivity
     }
 
     @Override
-    public Loader onCreateLoader(int id, Bundle args) {
-        switch (mScale) {
-            case MONTHLY:
-                return new MonthlyDataLoader(this, mDateFrom, mDateTo, this);
-            case DAILY:
-                return new DailyDataLoader(this, mDateFrom, mDateTo, this);
-            case HOURLY:
-                return new HourlyDataLoader(this, mDateFrom, mDateTo, this);
-            case SENSOR:
-                return new SensorDataLoader(this, mDateFrom, mDateTo, this);
-            default:
-                return null;
-        }
+    protected void onResume() {
+        super.onResume();
+        NetworkStateMonitor.registerListener(this);
+        NetworkStateMonitor.checkNetworkState(this);
     }
 
-    private void showEmptyMessage() {
-        ViewGroup rootView = (ViewGroup) ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
-        Snackbar.make(rootView, getString(R.string.error_data_not_found), Snackbar.LENGTH_LONG).show();
+    @Override
+    protected void onStop() {
+        super.onStop();
+        NetworkStateMonitor.unregisterListener(this);
+    }
+
+    @Override
+    public Loader onCreateLoader(int id, Bundle args) {
+        switch (mScale) {
+            case MONTHLY: return new MonthlyDataLoader(this, mDateFrom, mDateTo, this);
+            case DAILY:   return new DailyDataLoader(this, mDateFrom, mDateTo, this);
+            case HOURLY:  return new HourlyDataLoader(this, mDateFrom, mDateTo, this);
+            case SENSOR:  return new SensorDataLoader(this, mDateFrom, mDateTo, this);
+            default:      return null;
+        }
     }
 
     @Override
@@ -164,7 +172,7 @@ public class DataActivity extends AppCompatActivity
                 }
             }
         }
-        showEmptyMessage();
+        Snackbar.make(mRootView, getString(R.string.error_data_not_found), Snackbar.LENGTH_LONG).show();
     }
 
     @Override
@@ -211,5 +219,13 @@ public class DataActivity extends AppCompatActivity
         intent.putExtra("EXIT", true);
         startActivity(intent);
         finish();
+    }
+
+    @Override
+    public void onConnect() {}
+
+    @Override
+    public void onDisconnect() {
+        Snackbar.make(mRootView, getString(R.string.error_no_network), Snackbar.LENGTH_LONG).show();
     }
 }

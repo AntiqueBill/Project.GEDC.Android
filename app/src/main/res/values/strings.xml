@@ -10,6 +10,7 @@
     <string name="title.camera">监控摄像</string>
     <string name="title.match">设备配对</string>
     <string name="title.select_wifi">选择WiFi</string>
+    <string name="title.network_state_monitor">网络连接状态监控</string>
 
     <string name="common.ok">确定</string>
     <string name="common.cancel">取消</string>
@@ -43,6 +44,7 @@
 
     <string name="alert.fall">您的老人可能摔倒了！</string>
 
+    <string name="error.no_network">无网络连接，请先开启网络</string>
     <string name="error.auth.empty_username_or_password">用户名或密码不能为空！</string>
     <string name="error.auth.empty_username_or_email_or_password">用户名、邮箱或密码不能为空！</string>
     <string name="error.auth.wrong_username_or_password">用户名或密码错误！</string>

@@ -1,14 +1,17 @@
 package cn.edu.hit.project.ec;
 
-import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
+import android.view.View;
+import android.view.ViewGroup;
 import android.widget.VideoView;
 
-import java.util.Locale;
+import cn.edu.hit.project.ec.network.NetworkStateMonitor;
 
-public class VideoActivity extends Activity {
+public class VideoActivity extends Activity implements NetworkStateMonitor.OnNetworkStateChangeListener {
+    private View mRootView;
     private VideoView mVideoView;
 
     @Override
@@ -16,7 +19,8 @@ public class VideoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
 
-        @SuppressLint("DefaultLocale")
+        mRootView = ((ViewGroup) findViewById(android.R.id.content)).getChildAt(0);
+
         String fileName = String.format("rtsp://115.28.134.90/camera-%d.sdp",
                 ((App) getApplicationContext()).getSensorId());
         mVideoView = (VideoView) this.findViewById(R.id.videoView);
@@ -30,6 +34,8 @@ public class VideoActivity extends Activity {
         if (mVideoView != null && mVideoView.canPause()) {
             mVideoView.pause();
         }
+        NetworkStateMonitor.registerListener(this);
+        NetworkStateMonitor.checkNetworkState(this);
     }
 
     @Override
@@ -38,5 +44,14 @@ public class VideoActivity extends Activity {
         if (mVideoView != null) {
             mVideoView.resume();
         }
+        NetworkStateMonitor.unregisterListener(this);
+    }
+
+    @Override
+    public void onConnect() {}
+
+    @Override
+    public void onDisconnect() {
+        Snackbar.make(mRootView, getString(R.string.error_no_network), Snackbar.LENGTH_LONG).show();
     }
 }
