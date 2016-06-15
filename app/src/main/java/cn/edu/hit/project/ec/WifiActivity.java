@@ -30,7 +30,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import cn.edu.hit.project.ec.models.wifi.WifiSecurityType;
-import cn.edu.hit.project.ec.utils.ViewUtils;
 import cn.edu.hit.project.ec.utils.WifiUtils;
 import cn.edu.hit.project.ec.views.adapters.WifiListAdapter;
 
@@ -77,7 +76,6 @@ public class WifiActivity extends AppCompatActivity implements AdapterView.OnIte
                     mWifiLocks.add(WifiUtils.getWifiSecurity(wifi) != WifiSecurityType.NONE);
                 }
                 mListAdapter.notifyDataSetChanged();
-                ViewUtils.resetListViewHeight(mList);
             }
         };
 
@@ -94,7 +92,6 @@ public class WifiActivity extends AppCompatActivity implements AdapterView.OnIte
         mListAdapter = new WifiListAdapter(this, mWifiNames, mWifiSignalLevels, mWifiLocks);
         mList.setAdapter(mListAdapter);
         mList.setOnItemClickListener(this);
-        ViewUtils.resetListViewHeight(mList);
     }
 
     @Override

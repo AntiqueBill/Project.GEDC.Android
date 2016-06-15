@@ -56,7 +56,7 @@ public class WifiListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
         if(convertView == null) {
-            convertView = inflater.inflate(R.layout.list_item_wifi, null);
+            convertView = inflater.inflate(R.layout.list_item_wifi, parent, false);
             holder = new ViewHolder(convertView);
             convertView.setTag(holder);
         } else {
