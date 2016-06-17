@@ -29,14 +29,15 @@ public class MonthlyDataLoader extends BaseDataLoader<List<MonthlyData>> {
 
     @Override
     protected void onStartLoading() {
-        RealmQuery<MonthlyData> query = Realm.getDefaultInstance().where(MonthlyData.class);
-        RealmResults<MonthlyData> dataList = query.between("timestamp", from, to).findAllSorted("timestamp");
-        RealmResults<MonthlyData> outOfDateData = dataList.where().notEqualTo("sessionId", App.SESSION_ID).findAll();
-        if (dataList.size() == 0 || outOfDateData.size() > 0) {
-            forceLoad();
-        } else {
-            deliverResult(dataList);
-        }
+        forceLoad(); // 在找到合适的本地数据过期判断之前，强制从网络获取数据
+//        RealmQuery<MonthlyData> query = Realm.getDefaultInstance().where(MonthlyData.class);
+//        RealmResults<MonthlyData> dataList = query.between("timestamp", from, to).findAllSorted("timestamp");
+//        RealmResults<MonthlyData> outOfDateData = dataList.where().notEqualTo("sessionId", App.SESSION_ID).findAll();
+//        if (dataList.size() == 0 || outOfDateData.size() > 0) {
+//            forceLoad();
+//        } else {
+//            deliverResult(dataList);
+//        }
     }
 
     @Override

@@ -29,14 +29,15 @@ public class DailyDataLoader extends BaseDataLoader<List<DailyData>> {
 
     @Override
     protected void onStartLoading() {
-        RealmQuery<DailyData> query = Realm.getDefaultInstance().where(DailyData.class);
-        RealmResults<DailyData> dataList = query.between("timestamp", from, to).findAllSorted("timestamp");
-        RealmResults<DailyData> outOfDateData = dataList.where().notEqualTo("sessionId", App.SESSION_ID).findAll();
-        if (dataList.size() == 0 || outOfDateData.size() > 0) {
-            forceLoad();
-        } else {
-            deliverResult(dataList);
-        }
+        forceLoad(); // 在找到合适的本地数据过期判断之前，强制从网络获取数据
+//        RealmQuery<DailyData> query = Realm.getDefaultInstance().where(DailyData.class);
+//        RealmResults<DailyData> dataList = query.between("timestamp", from, to).findAllSorted("timestamp");
+//        RealmResults<DailyData> outOfDateData = dataList.where().notEqualTo("sessionId", App.SESSION_ID).findAll();
+//        if (dataList.size() == 0 || outOfDateData.size() > 0) {
+//            forceLoad();
+//        } else {
+//            deliverResult(dataList);
+//        }
     }
 
     @Override

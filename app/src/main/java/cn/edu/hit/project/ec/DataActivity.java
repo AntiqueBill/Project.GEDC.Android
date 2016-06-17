@@ -48,6 +48,7 @@ public class DataActivity extends AppCompatActivity
                 AdapterView.OnItemClickListener,
                 BaseDataLoader.OnLoadFailedListener,
                 NetworkStateMonitor.OnNetworkStateChangeListener {
+    private boolean isRendered;
     private String mUnit;
     private Date mDateTo;
     private Date mDateFrom;
@@ -135,44 +136,56 @@ public class DataActivity extends AppCompatActivity
 
     @Override
     public void onLoadFinished(Loader loader, Object data) {
-        if (data != null) {
-            ChartBuilder builder = new ChartBuilder(mChart).withScale(mScale).withData((List<BaseData>) data);
-            switch (mType) {
-                case BPM: builder = builder.withColor(getResources().getColor(R.color.card_red)).withTransformer(ChartBuilder.HEART_RATE_TRANSFORMER); break;
-                case TEM: builder = builder.withColor(getResources().getColor(R.color.card_blue)).withTransformer(ChartBuilder.TEMPERATURE_TRANSFORMER); break;
-                default: return;
-            }
-            builder = builder.withDateRange(mDateFrom, mDateTo);
-            builder.build();
+        if (!isRendered) {
+            if (data != null) {
+                ChartBuilder builder = new ChartBuilder(mChart).withScale(mScale).withData((List<BaseData>) data);
+                switch (mType) {
+                    case BPM:
+                        builder = builder.withColor(getResources().getColor(R.color.card_red)).withTransformer(ChartBuilder.HEART_RATE_TRANSFORMER);
+                        break;
+                    case TEM:
+                        builder = builder.withColor(getResources().getColor(R.color.card_blue)).withTransformer(ChartBuilder.TEMPERATURE_TRANSFORMER);
+                        break;
+                    default:
+                        return;
+                }
+                builder = builder.withDateRange(mDateFrom, mDateTo);
+                builder.build();
 
-            Coordinate<Date, BaseData>[] coordinates = builder.getCoordinates();
-            if (coordinates != null) {
-                mDataList.clear();
-                List<String> labels = new ArrayList<>();
-                List<Float> values = new ArrayList<>();
-                for (Coordinate<Date, BaseData> coordinate : coordinates) {
-                    Date t = coordinate.x;
-                    BaseData d = coordinate.y;
-                    if (d == null) {
-                        continue;
+                Coordinate<Date, BaseData>[] coordinates = builder.getCoordinates();
+                if (coordinates != null) {
+                    mDataList.clear();
+                    List<String> labels = new ArrayList<>();
+                    List<Float> values = new ArrayList<>();
+                    for (Coordinate<Date, BaseData> coordinate : coordinates) {
+                        Date t = coordinate.x;
+                        BaseData d = coordinate.y;
+                        if (d == null) {
+                            continue;
+                        }
+                        mDataList.add(d);
+                        labels.add(mDateFormat.format(t));
+                        switch (mType) {
+                            case BPM:
+                                values.add((float) d.getBpm());
+                                break;
+                            case TEM:
+                                values.add((float) d.getTem());
+                                break;
+                        }
                     }
-                    mDataList.add(d);
-                    labels.add(mDateFormat.format(t));
-                    switch (mType) {
-                        case BPM: values.add((float) d.getBpm()); break;
-                        case TEM: values.add((float) d.getTem()); break;
+                    mList.setAdapter(new DataListAdapter(this, labels, values, mUnit));
+                    ViewUtils.resetListViewHeight(mList);
+                    if (mDataList.size() > 0) {
+                        mChartCard.setVisibility(View.VISIBLE);
+                        mListCard.setVisibility(View.VISIBLE);
+                        return;
                     }
                 }
-                mList.setAdapter(new DataListAdapter(this, labels, values, mUnit));
-                ViewUtils.resetListViewHeight(mList);
-                if (mDataList.size() > 0) {
-                    mChartCard.setVisibility(View.VISIBLE);
-                    mListCard.setVisibility(View.VISIBLE);
-                    return;
-                }
+                isRendered = true;
             }
+            Snackbar.make(mRootView, getString(R.string.error_data_not_found), Snackbar.LENGTH_LONG).show();
         }
-        Snackbar.make(mRootView, getString(R.string.error_data_not_found), Snackbar.LENGTH_LONG).show();
     }
 
     @Override
