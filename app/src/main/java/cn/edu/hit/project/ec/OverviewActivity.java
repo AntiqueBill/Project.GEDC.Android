@@ -79,6 +79,7 @@ public class OverviewActivity extends AppCompatActivity
         User.logout(PreferenceManager.getDefaultSharedPreferences(this));
         Intent intent = new Intent(this, LoginActivity.class);
         startActivity(intent);
+        ((App) getApplication()).setUser(null);
         finish();
     }
 

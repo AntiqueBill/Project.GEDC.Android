@@ -31,8 +31,13 @@ public class App extends Application {
     }
 
     public void setUser(User user) {
-        sensorId = user.id;
-        apiToken = user.apiToken;
+        if (user == null) {
+            sensorId = -1;
+            apiToken = null;
+        } else {
+            sensorId = user.id;
+            apiToken = user.apiToken;
+        }
     }
 
     public int getSensorId() {
